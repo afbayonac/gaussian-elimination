@@ -90,8 +90,8 @@ void Sl::Resolve(){
 	double c;
 
 	for(k = 0; k < filas; k++ ){
-		  
-		#pragma omp parallel default(none) num_threads(hilos) shared(elementos, columnas, k, filas) private(i, j, c)
+
+		#pragma omp parallel num_threads(hilos) shared(k) private(i, j, c)
 		#pragma omp for schedule(static)
 
 		for(i = k; i < filas - 1; i++){
