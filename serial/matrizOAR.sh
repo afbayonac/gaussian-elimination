@@ -1,10 +1,9 @@
 #!/bin/bash
 #OAR -n prueba
 #PARA LANZAR UNA TAREA CON ESTE SCRIPT EJECUTE
-#  oarsub -l core=24 "./matrizOAR.sh 1000"
+#  oarsub -l core=24
 
 
-cd ~/MatrizFloat
 if [ $# -ne 2 ]
 then
         echo "oarsub -l core=N matriz.sh <tamano>"
@@ -14,6 +13,6 @@ else
 	do
 		echo working with $i
 		export OMP_NUM_THREADS=$i
-        	(time ./matriz $1) &> salida$i-$1
+      ./run $1 &> salida$i-$1
 	done
 fi
