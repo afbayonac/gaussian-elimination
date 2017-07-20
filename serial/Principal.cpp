@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 	double secs;
 
 	if(argc != 2){
-		cout << "sistema-lineal <tamano> => " << endl;
+		cout << "/.run <tamano>" << endl;
 		return 1;
 	}else{
 		// init sistema de ecuacicones lineales

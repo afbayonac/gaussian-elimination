@@ -73,7 +73,6 @@ void Sl::asignarElemento(const int i, const int j,
 
 void Sl::Inicializar(const int valor){
 	int i, j;
-	#pragma omp parallel for private(j) num_threads(hilos)
 	for(i=0; i<filas; i++){
 		for(j=0; j<columnas; j++){
 			elementos[i][j] = rand() % valor;

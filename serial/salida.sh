@@ -1,13 +1,13 @@
 ##!/bin/bash
 
-iteraciones=`expr 2`
+iteraciones=`expr 5`
 
-for (( tam = 10; tam <= 200; tam = tam + 10 ))
+for (( n = 100; n <= 3000; n = n + 100 ))
   do
     sum=`expr 0`
-    echo tam=$tam &>> salida
+    echo n=$n hilos=&>> salida
     for (( i = 0; i <= iteraciones; i++ ))
       do
-        echo $(./run $tam) >> salida
+        echo $(./run $n) >> salida
       done
   done

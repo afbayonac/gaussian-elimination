@@ -1,3 +1,4 @@
+#include <omp.h>
 #include "sistema-lineal.h"
 #include <iostream>
 #include <stdlib.h>
@@ -26,6 +27,7 @@ int main(int argc, char *argv[]){
 		cout << "./run <tamano> <hilos>" << endl;
 		return 1;
 	}else{
+    printf("%d\n", omp_get_max_threads( ));
 		// init sistema de ecuacicones lineales
 		size = atoi(argv[1]);
     hilos = atoi(argv[2]);

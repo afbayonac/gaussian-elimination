@@ -1,3 +1,4 @@
+#include <omp.h>
 #include "sistema-lineal.h"
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
@@ -86,11 +87,16 @@ void Sl::Resolve(){
 	int i;
 	int j = 0;
 	int k = 0;
+	double c;
+
 	for(k = 0; k < filas; k++ ){
-		#pragma omp parallel for private(j) num_threads(hilos)
+		  
+		#pragma omp parallel default(none) num_threads(hilos) shared(elementos, columnas, k, filas) private(i, j, c)
+		#pragma omp for schedule(static)
+
 		for(i = k; i < filas - 1; i++){
 			// s i  i-s*(i/s)
-			double c = elementos[i+1][k] / elementos[k][k];
+			c = elementos[i+1][k] / elementos[k][k];
 			elementos[i + 1][k] = 0;
 			for(j=k+1; j < columnas; j++){
 				elementos[i + 1][j] -= elementos[k][j] * c;

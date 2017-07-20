@@ -1,5 +1,6 @@
 #ifndef SL_H
 #define Sl_H
+#include <omp.h>
 #include <stdlib.h>     /* srand, rand */
 #include <iostream>
 using namespace std;
@@ -39,8 +40,6 @@ public:
 	Sl operator = (const Sl&);
 	Sl operator + (const Sl&);
 	Sl operator * (const Sl&);
-
-
 
 };
 #endif
