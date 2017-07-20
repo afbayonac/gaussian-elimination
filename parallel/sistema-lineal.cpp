@@ -5,7 +5,6 @@
 
 using namespace std;
 
-extern int hilos;
 
 // Sl hace referencia al sistema lineal generado
 //Constructor por omisi�n
@@ -91,9 +90,7 @@ void Sl::Resolve(){
 
 	for(k = 0; k < filas; k++ ){
 
-		#pragma omp parallel num_threads(hilos) shared(k) private(i, j, c)
-		#pragma omp for schedule(static)
-
+		#pragma omp parallel for  private(i, j, c) 
 		for(i = k; i < filas - 1; i++){
 			// s i  i-s*(i/s)
 			c = elementos[i+1][k] / elementos[k][k];

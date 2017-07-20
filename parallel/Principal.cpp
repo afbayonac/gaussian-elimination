@@ -23,14 +23,14 @@ int main(int argc, char *argv[]){
 	struct timeval t_ini, t_fin;
 	double secs;
 
-	if(argc != 3){
-		cout << "./run <tamano> <hilos>" << endl;
+	if(argc != 2){
+		cout << "./run <tamano>" << endl;
 		return 1;
 	}else{
-    
+
 		// init sistema de ecuacicones lineales
 		size = atoi(argv[1]);
-    hilos = atoi(argv[2]);
+    hilos = size;
 		Sl  sl(size);
 		sl.Inicializar(100);
 
