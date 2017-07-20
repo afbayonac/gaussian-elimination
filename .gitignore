@@ -1,2 +1,4 @@
 */salida
 */salida_*
+**/*.o
+**/run

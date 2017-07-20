@@ -90,7 +90,7 @@ void Sl::Resolve(){
 
 	for(k = 0; k < filas; k++ ){
 
-		#pragma omp parallel for  private(i, j, c) 
+		#pragma omp for  private(i, j, c)
 		for(i = k; i < filas - 1; i++){
 			// s i  i-s*(i/s)
 			c = elementos[i+1][k] / elementos[k][k];
@@ -103,6 +103,7 @@ void Sl::Resolve(){
 
 	for(k = filas -1; k >= 0 ; k-- ){
 		double sum = 0.0;
+		#pragma omp for  private(sum, j) 
 		for(j = columnas-2; j > k; j--) {
 			sum = sum + elementos[k][j] * elementos[j][columnas - 1];
 			elementos[k][j] = 0;
