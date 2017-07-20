@@ -1,4 +1,4 @@
-##!/bin/bash
+#!/bin/bash
 
 iteraciones=`expr 5`
 
