@@ -1,6 +1,6 @@
 #!/bin/bash
 
-iteraciones=`expr 5`
+iteraciones=`expr 2`
 
 for (( n = 100; n <= 3000; n = n + 100 ))
   do

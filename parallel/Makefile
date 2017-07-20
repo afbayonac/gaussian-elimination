@@ -1,6 +1,6 @@
 CC  =  g++
 #CC  =  icpc
-CFLAGS  = -fopenmp
+CFLAGS  = -g -fopenmp
 OTHERFLAGS = -c
 
 main: Principal sistema-lineal

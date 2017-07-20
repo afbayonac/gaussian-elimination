@@ -1,6 +1,6 @@
-CC  =   g++
-#CC  =   icpc
-CFLAGS  = -g 
+CC = g++
+#CC = icpc
+CFLAGS  = -g
 OTHERFLAGS = -c
 
 main: Principal sistema-lineal
