@@ -1,8 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=OpenMPtest
-#SBATCH --output=openmp.out
-#SBATCH --error=openmp.err
-#SBATCH --time=01:00:00
+#SBATCH --job-name=gaussian
 #SBATCH --partition=manycores24
 #SBATCH --men=34000
 
