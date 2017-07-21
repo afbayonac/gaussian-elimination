@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=gaussian
 #SBATCH --partition=manycores24
-#SBATCH --men=34000
+#SBATCH --mem=34000
 
 iteraciones=`expr 2`
 
