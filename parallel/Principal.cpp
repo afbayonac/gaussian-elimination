@@ -1,9 +1,7 @@
-#include <omp.h>
 #include "sistema-lineal.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include <sys/time.h>
 using namespace std;
 
@@ -24,7 +22,6 @@ int main(int argc, char *argv[]){
 		cout << "./run <tamano>" << endl;
 		return 1;
 	}else{
-    cout << omp_get_max_threads();
 		// init sistema de ecuacicones lineales
 		size = atoi(argv[1]);
 
@@ -41,7 +38,7 @@ int main(int argc, char *argv[]){
 
 		// resultado en milliseconds que demoro la solucion del sistema
 		secs = timeval_diff(&t_fin, &t_ini);
-		printf("%.16g", secs * 1000.0);
+		cout << secs * 1000.0;
 
 		return 0;
 	}

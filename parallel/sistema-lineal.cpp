@@ -1,10 +1,12 @@
 #include <omp.h>
 #include "sistema-lineal.h"
 #include <iostream>
+#include<time.h>
 #include <stdlib.h>     /* srand, rand */
 
 using namespace std;
 
+extern int hilos;
 
 // Sl hace referencia al sistema lineal generado
 //Constructor por omisi�n
@@ -19,9 +21,9 @@ Sl::Sl(const Sl& mat){
 	int i,j;
 	filas = mat.filas;
 	columnas = mat.columnas;
-	elementos = new float * [filas];
+	elementos = new double * [filas];
 	for(i=0; i<filas; i++){
-		elementos[i] = new float[columnas];
+		elementos[i] = new double[columnas];
 		for(j=0; j<columnas; j++){
 			elementos[i][j] = mat.elementos[i][j];
 		}
@@ -31,9 +33,9 @@ Sl::Sl(const int n){
 	int i, j;
 	filas = n;
 	columnas = n + 1;
-	elementos = new float * [filas];
+	elementos = new double * [filas];
 	for(i=0; i<filas; i++){
-		elementos[i] = new float[columnas];
+		elementos[i] = new double[columnas];
 	}
 }
 
@@ -43,7 +45,7 @@ Sl::~Sl(){
 }
 
 //M�todos de acceso
-float Sl::Elemento(const int i, const int j){
+double Sl::Elemento(const int i, const int j){
 	return this->elementos[i][j];
 }
 
@@ -67,13 +69,13 @@ void Sl::Mostrar(){
 
 //M�todos de modificaci�n
 void Sl::asignarElemento(const int i, const int j,
-  const float val){
+  const double val){
 	elementos[i][j] = val;
 }
 
 void Sl::Inicializar(const int valor){
 	int i, j;
-	#pragma omp parallel for private(j)
+	srand(time(NULL));
 	for(i=0; i<filas; i++){
 		for(j=0; j<columnas; j++){
 			elementos[i][j] = rand() % valor;
@@ -88,28 +90,23 @@ void Sl::Resolve(){
 	int k = 0;
 	double c;
 
-	for(k = 0; k < filas; k++ ){
-
-		#pragma omp parallel for  private(i, j, c)
-		for(i = k; i < filas - 1; i++){
+	for(k = 0; k < columnas - 1; k++ ){
+		for(i = k + 1; i < filas; i++){
 			// s i  i-s*(i/s)
-			c = elementos[i+1][k] / elementos[k][k];
-			elementos[i + 1][k] = 0;
-			for(j=k+1; j < columnas; j++){
-				elementos[i + 1][j] -= elementos[k][j] * c;
+			c = elementos[i][k] / elementos[k][k];
+			elementos[i][k] = 0;
+			for(j = k + 1; j < columnas; j++){
+				elementos[i][j] -= (elementos[k][j] * c);
 			}
 		}
 	}
 
 	for(k = filas -1; k >= 0 ; k-- ){
-		double sum = 0.0;
-		#pragma omp parallel for  private(sum, j)
 		for(j = columnas-2; j > k; j--) {
-			sum = sum + elementos[k][j] * elementos[j][columnas - 1];
+			elementos[k][columnas - 1] -= elementos[k][j] * elementos[j][columnas - 1];
 			elementos[k][j] = 0;
 		}
-		elementos[k][columnas - 1] = elementos[k][columnas - 1] - sum;
-		elementos[k][columnas - 1] = elementos[k][columnas - 1] / elementos[k][k];
+		elementos[k][columnas -1]  /= elementos[k][k];
 		elementos[k][k] = 1;
 	}
 }

@@ -14,9 +14,6 @@ double timeval_diff(struct timeval *a, struct timeval *b)
     (double)(b->tv_sec + (double)b->tv_usec/1000000);
 }
 
-
-int hilos = 0;
-
 int main(int argc, char *argv[]){
 	int size;
 	struct timeval t_ini, t_fin;
@@ -28,7 +25,7 @@ int main(int argc, char *argv[]){
 	}else{
 		// init sistema de ecuacicones lineales
 		size = atoi(argv[1]);
-		hilos = size;
+
 		Sl  sl(size);
 		sl.Inicializar(100);
 

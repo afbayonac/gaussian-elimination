@@ -10,7 +10,7 @@ class Sl {
 
 private:
 	int filas, columnas;
-	float **elementos;
+	double **elementos;
 
 public:
 	//Constructores
@@ -21,13 +21,13 @@ public:
 	~Sl();
 
 	//Métodos de acceso
-	float Elemento(const int, const int);
+	double Elemento(const int, const int);
 	int Filas();
 	int Columnas();
 	void Mostrar();
 
 	//Métodos de modificación
-	void asignarElemento(const int, const int, const float);
+	void asignarElemento(const int, const int, const double);
 	void Inicializar(const int);
 	void Resolve();
 	void Leer();
