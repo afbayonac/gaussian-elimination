@@ -91,6 +91,7 @@ void Sl::Resolve(){
 	double c;
 
 	for(k = 0; k < columnas - 1; k++ ){
+		#pragma omp parallel for  private(i, j, c)
 		for(i = k + 1; i < filas; i++){
 			// s i  i-s*(i/s)
 			c = elementos[i][k] / elementos[k][k];
